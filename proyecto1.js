@@ -1,3 +1,27 @@
+// primera entrega del proyecto final(TRES EN RAYAS)
+
+
+const prueba = [
+    ["btn-1","btn-2","btn-3"],
+    ["btn-4","btn-5","btn-6"],
+    ["btn-7","btn-8","btn-9"]
+]
+
+const currentDiv = document.getElementById("ganador");
+
+for(let a=0; a<prueba.length; a++) {
+    console.log("a",a)
+    const newDiv = document.createElement("div");
+    newDiv.classList.add(`juego_${a+1}`)
+    document.body.insertBefore(newDiv, currentDiv);
+    for(let b=0; b<prueba[a].length; b++){
+        console.log(`[${a}][${b}]: ${prueba[a][b]}`)
+        const newButton = document.createElement("button")
+        newButton.setAttribute("id",prueba[a][b])
+        newDiv.appendChild(newButton)
+    }
+}
+
 const uno = document.getElementById("btn-1")
 const dos = document.getElementById("btn-2")
 const tres = document.getElementById("btn-3")
@@ -8,9 +32,6 @@ const siete = document.getElementById("btn-7")
 const ocho = document.getElementById("btn-8")
 const nueve = document.getElementById("btn-9")
 let player= document.getElementById("player")
-
-
-
 // jugador 1
 // jugador 2
 let turno = true
