@@ -1,0 +1,40 @@
+body{
+    background-color: MediumSlateBlue;
+    font-family: 'Raleway', sans-serif;
+}
+div{
+    display: flex;
+    justify-content: center;
+}
+button{
+    width: 150px;
+    height: 120px;
+    font-size: 100px;
+    background-color: mediumslateblue;
+}
+#titulo,#subtitulo{
+    text-align: center;
+    color:#be3144;
+}
+.juego_1 {
+    padding-top: 50px;
+}
+#btn-1,#btn-2,#btn-3 {
+    border-top: none;
+}
+#btn-1,#btn-4,#btn-7 {
+    border-left: none;
+}
+#btn-3,#btn-6,#btn-9 {
+    border-right: none;
+}
+#btn-7,#btn-8,#btn-9 {
+    border-bottom: none;
+}
+button {
+    border-color: aqua;
+}
+#player, #ganador{
+    color:black;
+    text-align: center;
+}
