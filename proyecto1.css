@@ -2,7 +2,7 @@ body{
     background-color: MediumSlateBlue;
     font-family: 'Raleway', sans-serif;
 }
-div{
+#clear, #botones{
     display: flex;
     justify-content: center;
 }
@@ -37,4 +37,27 @@ button {
 #player, #ganador{
     color:black;
     text-align: center;
+}
+#reiniciar {
+    margin-top: 20px;
+    width: 100px;
+    font-size: 1rem;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    color: white;
+}
+table, tr, th, td{
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+#tabla {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 100px;
+}
+tr, th {
+    font-size: 1.5rem;
 }

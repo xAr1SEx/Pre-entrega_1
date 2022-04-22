@@ -6,14 +6,15 @@ const prueba = [
     ["btn-4","btn-5","btn-6"],
     ["btn-7","btn-8","btn-9"]
 ]
-
+const content = document.getElementById("content")
 const currentDiv = document.getElementById("ganador");
 
 for(let a=0; a<prueba.length; a++) {
     console.log("a",a)
     const newDiv = document.createElement("div");
     newDiv.classList.add(`juego_${a+1}`)
-    document.body.insertBefore(newDiv, currentDiv);
+    newDiv.setAttribute("id", "botones")
+    content.appendChild(newDiv);
     for(let b=0; b<prueba[a].length; b++){
         console.log(`[${a}][${b}]: ${prueba[a][b]}`)
         const newButton = document.createElement("button")
@@ -22,6 +23,19 @@ for(let a=0; a<prueba.length; a++) {
     }
 }
 
+
+
+
+const puntuacion = JSON.parse(localStorage.getItem("puntaje")) || {
+    player_1:{victoria:0,derrota:0},player_2:{victoria:0,derrota:0}}
+let victoria_1 = document.getElementById("victoria_1")
+let victoria_2 = document.getElementById("victoria_2")
+let derrota_1 = document.getElementById("derrota_1")
+let derrota_2 = document.getElementById("derrota_2")
+victoria_1.innerHTML = puntuacion.player_1.victoria
+derrota_1.innerHTML = puntuacion.player_1.derrota
+victoria_2.innerHTML = puntuacion.player_2.victoria
+derrota_2.innerHTML = puntuacion.player_2.derrota
 const uno = document.getElementById("btn-1")
 const dos = document.getElementById("btn-2")
 const tres = document.getElementById("btn-3")
@@ -31,7 +45,10 @@ const seis = document.getElementById("btn-6")
 const siete = document.getElementById("btn-7")
 const ocho = document.getElementById("btn-8")
 const nueve = document.getElementById("btn-9")
-let player= document.getElementById("player")
+const player= document.getElementById("player")
+let puntaje1 = document.getElementById("puntaje_1")
+let puntaje2 = document.getElementById("puntaje_2")
+let reiniciar = document.getElementById("reiniciar")
 // jugador 1
 // jugador 2
 let turno = true
@@ -57,15 +74,48 @@ siete.disabled = true
 ocho.disabled = true
 nueve.disabled = true
 }
+const almacenamiento = (ganador) =>{
+    if( ganador == "primer player ganador"){
+        puntuacion.player_1.victoria += 1
+        puntuacion.player_2.derrota += 1
+        let puntaje = JSON.stringify(puntuacion);
+        localStorage.setItem(`puntaje`, puntaje)
+        let puntajeLocal1 = JSON.parse(localStorage.getItem(`puntaje`))
+        victoria_1.innerHTML = puntajeLocal1.player_1.victoria
+        derrota_1.innerHTML = puntajeLocal1.player_1.derrota
+        victoria_2.innerHTML = puntajeLocal1.player_2.victoria
+        derrota_2.innerHTML = puntajeLocal1.player_2.derrota
+        console.log(puntajeLocal1.player_1.victoria)
+        console.log(puntuacion.player_1)
+    }
+    else {
+        puntuacion.player_1.derrota += 1
+        puntuacion.player_2.victoria += 1
+        let puntaje = JSON.stringify(puntuacion);
+        localStorage.setItem(`puntaje`, puntaje)
+        let puntajeLocal2 = JSON.parse(localStorage.getItem(`puntaje`))
+        victoria_2.innerHTML = puntajeLocal2.player_2.victoria
+        derrota_2.innerHTML = puntajeLocal2.player_2.derrota
+        victoria_1.innerHTML = puntajeLocal2.player_1.victoria
+        derrota_1.innerHTML = puntajeLocal2.player_1.derrota
+        console.log(puntuacion.player_2)
+
+    }
+
+}
 const combinacion_1 = () => {
     if(uno.innerHTML == "X" && dos.innerHTML == "X" && tres.innerHTML == "X" || (uno.innerHTML == "O" && dos.innerHTML == "O" && tres.innerHTML == "O")){
         if(uno.innerHTML == "X"){
-            player.innerHTML = "primer player ganador"
+            const ganador = "primer player ganador"
+            player.innerHTML = ganador
             disabled()
+            almacenamiento(ganador)
         }
         else {
-            player.innerHTML = "segundo player ganador"
+            const ganador = "segundo player ganador"
+            player.innerHTML = ganador
             disabled()
+            almacenamiento(ganador)
         }
     }
 }
@@ -74,10 +124,12 @@ const combinacion_2 = () => {
         if(uno.innerHTML == "X"){
             player.innerHTML = "primer player ganador"
             disabled()
+            almacenamiento()
         }
         else {
             player.innerHTML = "segundo player ganador"
             disabled()
+            almacenamiento()
         }
     }
 }
@@ -86,10 +138,12 @@ const combinacion_3 = () => {
     if(uno.innerHTML == "X"){
      player.innerHTML = "primer player ganador"
         disabled()
+        almacenamiento()
     }
     else {
      player.innerHTML = "segundo player ganador"
         disabled()
+        almacenamiento()
     }
 }
 const combinacion_4 = () => {
@@ -97,10 +151,12 @@ const combinacion_4 = () => {
         if(dos.innerHTML == "X"){
             player.innerHTML = "primer player ganador"
             disabled()
+            almacenamiento()
         }
         else {
             player.innerHTML = "segundo player ganador"
             disabled()
+            almacenamiento()
         }
     }
 }
@@ -109,10 +165,12 @@ const combinacion_5 = () => {
         if(tres.innerHTML == "X"){
             player.innerHTML = "primer player ganador"
             disabled()
+            almacenamiento()
         }
         else {
             player.innerHTML = "segundo player ganador"
             disabled()
+            almacenamiento()
         }
     }
 }
@@ -121,10 +179,12 @@ const combinacion_6 = () => {
         if(tres.innerHTML == "X"){
             player.innerHTML = "primer player ganador"
             disabled()
+            almacenamiento()
         }
         else {
             player.innerHTML = "segundo player ganador"
             disabled()
+            almacenamiento()
         }
     }
 }
@@ -133,11 +193,12 @@ const combinacion_7 = () => {
         if(cuatro.innerHTML == "X" ){
             player.innerHTML = "primer player ganador"
             disabled()
-        
+            almacenamiento()
         }
         else {
             player.innerHTML = "segundo player ganador"
             disabled()
+            almacenamiento()
         }
     }
 }
@@ -146,10 +207,12 @@ const combinacion_8 =() => {
         if(siete.innerHTML == "X" ){
             player.innerHTML = "primer player ganador"
             disabled()
+            almacenamiento()
         }
         else {
             player.innerHTML = "segundo player ganador"
             disabled()
+            almacenamiento()
         }
     }
 }
@@ -159,6 +222,37 @@ const empate = () => {
         player.innerHTML = "EMPATE"
     }
 }
+reiniciar.addEventListener(`click`, () => {
+   uno.innerHTML = ""
+   dos.innerHTML = ""
+   tres.innerHTML = ""
+   cuatro.innerHTML = ""
+   cinco.innerHTML = ""
+   seis.innerHTML = ""
+   siete.innerHTML = ""
+   ocho.innerHTML = ""
+   nueve.innerHTML = ""
+   player.innerHTML = "TURNO DEL PRIMER JUGADOR"
+   objeto.btn_1 = false;
+   objeto.btn_2 = false;
+   objeto.btn_3 = false;
+   objeto.btn_4 = false;
+   objeto.btn_5 = false;
+   objeto.btn_6 = false;
+   objeto.btn_7 = false;
+   objeto.btn_8 = false;
+   objeto.btn_9 = false;
+   turno = true;
+   uno.disabled = false;
+   dos.disabled = false;
+tres.disabled = false;
+cuatro.disabled = false;
+cinco.disabled = false;
+seis.disabled = false;
+siete.disabled = false;
+ocho.disabled = false;
+nueve.disabled = false;
+})
 uno.addEventListener("click", () => {
 if(!objeto.btn_1){
     objeto.btn_1 = true;
