@@ -28,14 +28,17 @@ for(let a=0; a<prueba.length; a++) {
 
 const puntuacion = JSON.parse(localStorage.getItem("puntaje")) || {
     player_1:{victoria:0,derrota:0},player_2:{victoria:0,derrota:0}}
-let victoria_1 = document.getElementById("victoria_1")
-let victoria_2 = document.getElementById("victoria_2")
-let derrota_1 = document.getElementById("derrota_1")
-let derrota_2 = document.getElementById("derrota_2")
-victoria_1.innerHTML = puntuacion.player_1.victoria
-derrota_1.innerHTML = puntuacion.player_1.derrota
-victoria_2.innerHTML = puntuacion.player_2.victoria
-derrota_2.innerHTML = puntuacion.player_2.derrota
+const {player_1, player_2} = puntuacion;
+const {victoria:victoria1, derrota:derrota1} = player_1;
+const {victoria:victoria2, derrota:derrota2} = player_2;
+const victoria_1 = document.getElementById("victoria_1")
+const victoria_2 = document.getElementById("victoria_2")
+const derrota_1 = document.getElementById("derrota_1")
+const derrota_2 = document.getElementById("derrota_2")
+victoria_1.innerHTML = victoria1;
+derrota_1.innerHTML = derrota1;
+victoria_2.innerHTML = victoria2;
+derrota_2.innerHTML = derrota2;
 const uno = document.getElementById("btn-1")
 const dos = document.getElementById("btn-2")
 const tres = document.getElementById("btn-3")
@@ -46,9 +49,9 @@ const siete = document.getElementById("btn-7")
 const ocho = document.getElementById("btn-8")
 const nueve = document.getElementById("btn-9")
 const player= document.getElementById("player")
-let puntaje1 = document.getElementById("puntaje_1")
-let puntaje2 = document.getElementById("puntaje_2")
-let reiniciar = document.getElementById("reiniciar")
+const puntaje1 = document.getElementById("puntaje_1")
+const puntaje2 = document.getElementById("puntaje_2")
+const reiniciar = document.getElementById("reiniciar")
 // jugador 1
 // jugador 2
 let turno = true
@@ -253,19 +256,15 @@ siete.disabled = false;
 ocho.disabled = false;
 nueve.disabled = false;
 })
+const asignacion = (jugador, numero, letra, booleano) => {
+    player.innerHTML = `TURNO DEL ${jugador} JUGADOR`
+    numero.innerHTML = letra
+    turno = booleano;
+}
 uno.addEventListener("click", () => {
 if(!objeto.btn_1){
     objeto.btn_1 = true;
-if(turno) {
-    player.innerHTML = "TURNO DEL SEGUNDO JUGADOR"
-    uno.innerHTML = "X"
-    turno = false;
-}
-else {
-    player.innerHTML = "TURNO DEL PRIMER JUGADOR"
-    uno.innerHTML = "O"
-    turno = true;
-}
+turno ?  asignacion("SEGUNDO", uno, "X", false) : asignacion("PRIMERO", uno, "O", true)
 combinacion_1();
 combinacion_2();
 combinacion_3();
@@ -275,16 +274,7 @@ empate();
 dos.addEventListener("click", () => {
 if(!objeto.btn_2){
     objeto.btn_2 = true;
-    if(turno) {
-        player.innerHTML = "TURNO DEL SEGUNDO JUGADOR"
-        dos.innerHTML = "X"
-        turno = false;
-    }
-    else {
-        player.innerHTML = "TURNO DEL PRIMER JUGADOR"
-        dos.innerHTML = "O"
-        turno = true;
-    }
+    turno ?  asignacion("SEGUNDO", dos, "X", false) : asignacion("PRIMERO", dos, "O", true)
 combinacion_1();
 combinacion_4();
 empate();
@@ -293,16 +283,7 @@ empate();
 tres.addEventListener("click", () => {
     if(!objeto.btn_3){
         objeto.btn_3 = true;
-    if(turno) {
-        player.innerHTML = "TURNO DEL SEGUNDO JUGADOR"
-        tres.innerHTML = "X"
-        turno = false;
-    }
-    else {
-        player.innerHTML = "TURNO DEL PRIMER JUGADOR"
-        tres.innerHTML = "O"
-        turno = true;
-    }
+   turno ? asignacion("SEGUNDO", tres, "X", false) : asignacion("PRIMERO", tres, "O", true)
 combinacion_1();
 combinacion_5();
 combinacion_6();
@@ -312,16 +293,7 @@ empate();
 cuatro.addEventListener("click", () => {
     if(!objeto.btn_4){
         objeto.btn_4 = true;
-    if(turno) {
-        player.innerHTML = "TURNO DEL SEGUNDO JUGADOR"
-        cuatro.innerHTML = "X"
-        turno = false;
-    }
-    else {
-        player.innerHTML = "TURNO DEL PRIMER JUGADOR"
-        cuatro.innerHTML = "O"
-        turno = true;
-    }
+    turno ? asignacion("SEGUNDO", cuatro, "X", false) : asignacion("PRIMERO", tres, "O", true)
 combinacion_2();
 combinacion_7();
 empate();
@@ -330,16 +302,7 @@ empate();
 cinco.addEventListener("click", () => {
     if(!objeto.btn_5){
         objeto.btn_5 = true;
-    if(turno) {
-        player.innerHTML = "TURNO DEL SEGUNDO JUGADOR"
-        cinco.innerHTML = "X"
-        turno = false;
-    }
-    else {
-        player.innerHTML = "TURNO DEL PRIMER JUGADOR"
-        cinco.innerHTML = "O"
-        turno = true;
-    }
+   turno ? asignacion("SEGUNDO", cinco, "X", false) : asignacion("PRIMERO", cinco, "O", true)
 combinacion_7();
 combinacion_4();
 combinacion_3();
@@ -351,16 +314,7 @@ empate();
 seis.addEventListener("click", () => {
     if(!objeto.btn_6){
         objeto.btn_6 = true;
-    if(turno) {
-        player.innerHTML = "TURNO DEL SEGUNDO JUGADOR"
-        seis.innerHTML = "X"
-        turno = false;
-    }
-    else {
-        player.innerHTML = "TURNO DEL PRIMER JUGADOR"
-        seis.innerHTML = "O"
-        turno = true;
-    }
+    turno ? asignacion("SEGUNDO", seis, "X", false) : asignacion("PRIMERO", seis, "O", true)
 combinacion_7();
 combinacion_5();
 empate();
@@ -369,16 +323,7 @@ empate();
 siete.addEventListener("click", () => {
     if(!objeto.btn_7){
         objeto.btn_7 = true;
-        if(turno) {
-            player.innerHTML = "TURNO DEL SEGUNDO JUGADOR"
-            siete.innerHTML = "X"
-            turno = false;
-        }
-        else {
-            player.innerHTML = "TURNO DEL PRIMER JUGADOR"
-            siete.innerHTML = "O"
-            turno = true;
-        }
+    turno ? asignacion("SEGUNDO", siete, "X", false) : asignacion("PRIMERO", siete, "O", true)
 combinacion_8();
 combinacion_2();
 combinacion_6();
@@ -388,16 +333,7 @@ empate();
 ocho.addEventListener("click", () => {
     if(!objeto.btn_8){
         objeto.btn_8 = true;
-        if(turno) {
-            player.innerHTML = "TURNO DEL SEGUNDO JUGADOR"
-            ocho.innerHTML = "X"
-            turno = false;
-        }
-        else {
-            player.innerHTML = "TURNO DEL PRIMER JUGADOR"
-            ocho.innerHTML = "O"
-            turno = true;
-        }
+        turno ? asignacion("SEGUNDO", ocho, "X", false) : asignacion("PRIMERO", ocho, "O", true)
 combinacion_8();
 combinacion_4();
 empate();
@@ -407,14 +343,7 @@ empate();
 nueve.addEventListener("click", () => {
     if(!objeto.btn_9){
         objeto.btn_9 = true;
-        if(turno) {
-            nueve.innerHTML = "X"
-            turno = false;
-        }
-        else {
-            nueve.innerHTML = "O"
-            turno = true;
-        }
+    turno ? asignacion("PRIMERO", nueve, "X", false) : asignacion("PRIMERO", nueve, "O", true)
 combinacion_8();
 combinacion_3();
 empate();
