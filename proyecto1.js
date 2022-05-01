@@ -1,6 +1,14 @@
 // primera entrega del proyecto final(TRES EN RAYAS)
-
-
+Swal.fire({
+    title: 'Bienvenido a mi juegos tres en rayas :D',
+    showClass: {
+      popup: 'animate__animated animate__fadeInDown'
+    },
+    hideClass: {
+      popup: 'animate__animated animate__fadeOutUp'
+    }
+  })
+  
 const prueba = [
     ["btn-1","btn-2","btn-3"],
     ["btn-4","btn-5","btn-6"],
@@ -52,6 +60,7 @@ const player= document.getElementById("player")
 const puntaje1 = document.getElementById("puntaje_1")
 const puntaje2 = document.getElementById("puntaje_2")
 const reiniciar = document.getElementById("reiniciar")
+const guardar = document.getElementById("guardar")
 // jugador 1
 // jugador 2
 let turno = true
@@ -256,10 +265,35 @@ siete.disabled = false;
 ocho.disabled = false;
 nueve.disabled = false;
 })
+guardar.addEventListener(`click`, () => {
+    Swal.fire({
+        title: '¿Quiere guardar sus cambios del puntaje?',
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: 'guardar',
+        denyButtonText: `no guardar`,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire('Saved!', '', 'success')
+        } else if (result.isDenied) {
+          Swal.fire('Changes are not saved', '', 'info')
+        }
+      })
+})
+const toast = (mensaje) => {
+    Toastify({
+        text: mensaje,
+        duration: 2000,
+        gravity: `bottom`,
+        position: 'left',
+        className: 'toast',
+    }).showToast()
+}
 const asignacion = (jugador, numero, letra, booleano) => {
     player.innerHTML = `TURNO DEL ${jugador} JUGADOR`
     numero.innerHTML = letra
     turno = booleano;
+    toast(`TURNO DEL ${jugador} JUGADOR`)
 }
 uno.addEventListener("click", () => {
 if(!objeto.btn_1){
@@ -293,7 +327,7 @@ empate();
 cuatro.addEventListener("click", () => {
     if(!objeto.btn_4){
         objeto.btn_4 = true;
-    turno ? asignacion("SEGUNDO", cuatro, "X", false) : asignacion("PRIMERO", tres, "O", true)
+    turno ? asignacion("SEGUNDO", cuatro, "X", false) : asignacion("PRIMERO", cuatro, "O", true)
 combinacion_2();
 combinacion_7();
 empate();
